@@ -38,4 +38,4 @@ int pushInt(short **intArr, int *intCount, int *intCapacity, short num);
  */
 int readData(FILE *fp, short **intArr, char ***strArr, int *intSize, int *strSize);
 
-#endif // DATA_H
+#endif

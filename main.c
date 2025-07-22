@@ -31,13 +31,13 @@ int main(int argc, char *argv[]) {
     // Check if the correct number of arguments is provided
     if (argc < 5) {
         fprintf(stderr, "Usage: %s <periodicTable.txt> [-pn|-ext|-v] <input.txt> <output.txt>\n", argv[0]);
-        return 1; // Return error if insufficient arguments
+        return 1;
     }
 
-    char *periodicTableFile = argv[1];  ///< Path to the periodic table file
-    char *flag = argv[2];                 ///< Operation flag: -pn, -ext, or -v
-    char *inputFile = argv[3];            ///< Path to the input file with chemical formulas
-    char *outputFile = argv[4];           ///< Path to the output file for results
+    char *periodicTableFile = argv[1];
+    char *flag = argv[2];                 
+    char *inputFile = argv[3];            
+    char *outputFile = argv[4];           
 
     // Open the input files and check for errors
     FILE *input = fopen(inputFile, "r");
@@ -47,14 +47,14 @@ int main(int argc, char *argv[]) {
         return 1; // Return error if files cannot be opened
     }
 
-    short *intArr = NULL;  ///< Array for storing integer values (proton numbers)
-    char **strArr = NULL;  ///< Array for storing string values (element symbols)
-    int intSize = 0;       ///< Count of integers read from the periodic table
-    int strSize = 0;       ///< Count of strings read from the periodic table
+    short *intArr = NULL;  
+    char **strArr = NULL;  
+    int intSize = 0;       
+    int strSize = 0;      
 
     // Read the data from the periodic table file
     if (readData(periodicTable, &intArr, &strArr, &intSize, &strSize) != 0) {
-        return 1; // Return error if data reading fails
+        return 1; 
     }
 
     // Process based on the specified flag
@@ -68,25 +68,25 @@ int main(int argc, char *argv[]) {
         printf("Writing formulas to %s\n", outputFile);
     } else if (strcmp(flag, "-v") == 0) {
         printf("Verify balanced parentheses in %s\n", inputFile);
-        int lineNumber = 1, i = 0;   ///< Current line number in the input file
-        char formula[100];    ///< Buffer for reading formulas
+        int lineNumber = 1, i = 0;
+        char formula[100];
 
         // Read and verify each formula from the input file
         while (fscanf(input, "%s", formula) == 1) {
             if (isBalanced(formula) == 0) {
                 printf("Error: Unbalanced parenthesis at line %d\n", lineNumber);
             }
-            lineNumber++; // Increment line number
-            formula[0] = '\0'; // Clear the buffer
+            lineNumber++;
+            formula[0] = '\0'; 
         }
         if(i==0)
             printf("Parentheses are balanced for all chemical formulas\n");
     } else {
         // Handle unknown flags
         fprintf(stderr, "Unknown flag: %s\n", flag);
-        return 1; // Return error for unknown flag
+        return 1; 
     }
     free(intArr);
     free(strArr);
-    return 0; // Return success
+    return 0;
 }

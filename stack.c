@@ -33,7 +33,7 @@ typedef struct {
  * @return 1 if the stack is empty, 0 otherwise.
  */
 int stackisempty(int size) {
-    return size == 0; // Return true if size is zero
+    return size == 0;
 }
 
 /**
@@ -52,25 +52,25 @@ int stackisempty(int size) {
 int pushStr(char ***strArr, int *strCount, int *strCapacity, const char *str) {
     // Check if reallocation is needed
     if (*strCount >= *strCapacity) {
-        *strCapacity *= 2; // Double the capacity
+        *strCapacity *= 2;
         char **temp = (char **)realloc(*strArr, *strCapacity * sizeof(char *));
         if (temp == NULL) { 
             perror("Error reallocating memory for strings");
-            return 1; // Return error if realloc fails
+            return 1;
         }
-        *strArr = temp; // Update the pointer
+        *strArr = temp;
     }
 
     // Allocate memory for the new string and check for success
     (*strArr)[*strCount] = (char *)malloc((strlen(str) + 1) * sizeof(char));
     if ((*strArr)[*strCount] == NULL) {
         perror("Error allocating memory for string");
-        return 1; // Return error if malloc fails
+        return 1; 
     }
 
     // Copy the string and update the count
     strcpy((*strArr)[(*strCount)++], str);
-    return 0; // Return success
+    return 0;
 }
 
 /**
@@ -87,10 +87,10 @@ int pushStr(char ***strArr, int *strCount, int *strCapacity, const char *str) {
 char *popstr(char **arr, int *size) {
     if (*size == 0) {
         perror("Error: stack is empty");
-        exit(1); // Exit if trying to pop from an empty stack
+        exit(1); 
     }
-    char *popped = arr[--(*size)]; // Decrement size and return top element
-    return popped; // Return the popped string
+    char *popped = arr[--(*size)];
+    return popped;
 }
 
 /**
@@ -106,7 +106,7 @@ char *popstr(char **arr, int *size) {
 char *peek(char **arr, int size) {
     if (size == 0) {
         perror("Error: stack is empty");
-        exit(1); // Exit if trying to peek at an empty stack
+        exit(1);
     }
-    return arr[size - 1]; // Return the top string without modifying the stack
+    return arr[size - 1];
 }

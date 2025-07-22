@@ -64,4 +64,4 @@ char *peek(char **arr, int size);
  */
 int stackisempty(int size);
 
-#endif // STACK_H
+#endif
